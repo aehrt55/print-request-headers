@@ -2,8 +2,13 @@ const express = require('express')
 
 const app = express()
 
+app.set('trust proxy', true);
+
 app.use((req, res) => {
-  res.json(req.headers)
+  res.json({
+    headers: req.headers,
+    'headerHost': req.header('host')
+  })
 })
 
 app.listen(3000, err => {
